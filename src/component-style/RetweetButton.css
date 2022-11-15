@@ -1,0 +1,9 @@
+.retweet-button > img {
+    width: 25px;
+}
+
+.retweet-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

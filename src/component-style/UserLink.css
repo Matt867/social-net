@@ -1,0 +1,10 @@
+.UserLink {
+    display: flex;
+    align-items: center;
+}
+
+.verified-badge {
+    width: 18px;
+    height: 18px;
+    margin-left: 5px;
+}

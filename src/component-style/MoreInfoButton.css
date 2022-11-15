@@ -1,0 +1,19 @@
+.more-info-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.more-info-button {
+    width: 24px;
+    margin: auto;
+
+    padding: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-radius: 999px;
+    transition: background-color 0.2s linear;
+}
+
+.more-info-button:hover {
+    background-color: rgb(197, 197, 197);
+}

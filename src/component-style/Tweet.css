@@ -1,0 +1,83 @@
+.tweet-container {
+    display: grid;
+    grid-template-columns: 150px auto 60px;
+    grid-template-rows: 40px auto 40px;
+    background-color: white;
+    transition: background-color 0.1s linear;
+    min-width: 581px;
+    max-width: 720px;
+}
+
+.tweet-container:hover {
+    background-color: #E1E8ED;
+}
+
+.profile-pic-top {
+    /* background-color: aqua; */
+    grid-row: span 2;
+    grid-row-start: 0;
+    grid-row-end: 3;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.user-container {
+    /* background-color: beige; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tweet-content-container {
+    /* background-color: brown; */
+    grid-column: span 2;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    padding-right: 15px;
+    font-size: 18px;
+}
+
+.tweet-content-container > p {
+    margin-top: 0px;
+}
+
+.UserLink {
+    font-size: 18px;
+}
+
+.handle {
+    font-size: 18px;
+}
+
+.profile-pic {
+    width: 90px;
+    height: 90px;
+    border-radius: 999999px;
+    margin-top: 10px;
+}
+
+
+.blank {
+    /* background-color: crimson; */
+}
+
+.interaction-buttons-container {
+    /* background-color: olivedrab; */
+    grid-column: span 2;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 50px;
+    padding-bottom: 15px;
+}
+
+.user-preview-hover-popup {
+    position: absolute;
+    top: 40px;
+    background-color: #F5F8FA;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    border-radius: 15px;
+}

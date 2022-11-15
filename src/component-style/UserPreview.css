@@ -1,0 +1,43 @@
+.user-preview-hover-popup {
+    display: grid;
+    grid-template-columns: 150px 150px;
+    grid-template-rows: 95px 25px 25px auto 40px;
+    padding: 20px;
+}
+
+.profile-pic-container > img {
+    height: 80px;
+    width: 80px;
+}
+
+.follow-button-container {
+    display: flex;
+    justify-content: end;
+}
+
+.bio-container {
+    grid-column: span 2;
+    grid-row-start: 4;
+}
+
+.username-container {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+}
+
+.handle-container {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+}
+
+.follow-count-container {
+    display: flex;
+    align-items: center;
+}
+
+.following-count-container {
+    display: flex;
+    align-items: center;
+}

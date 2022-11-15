@@ -1,0 +1,9 @@
+.comment-button > img {
+    width: 25px;
+}
+
+.comment-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

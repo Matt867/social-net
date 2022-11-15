@@ -1,0 +1,10 @@
+.follower-count {
+    display: flex;
+    flex: end;
+    align-items: center;
+    gap: 6px;
+}
+
+.follower-count > p {
+    margin: 0px;
+}

@@ -1,0 +1,9 @@
+.share-button > img {
+    width: 25px;
+}
+
+.share-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

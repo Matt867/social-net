@@ -1,0 +1,9 @@
+.following-count {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.following-count > p {
+    margin: 0px;
+}
