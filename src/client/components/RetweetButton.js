@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import '../component-style/RetweetButton.css'
-import RETWEET from '../retweet.png'
+import RETWEET from '../images/retweet.png'
 
 export default function RetweetButton (props) {
 
-    const [retweetCount, setRetweetCount] = useState(Math.floor(Math.random()*1000))
+    const [retweetCount, setRetweetCount] = useState(props.retweetCount ? props.retweetCount : 0)
     const [retweeted, setRetweeted] = useState(false)
 
     function handleClick(e) {

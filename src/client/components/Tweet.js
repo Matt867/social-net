@@ -18,30 +18,31 @@ import ShareButton from './ShareButton';
 
 export default function Tweet (props) {
 
+
+
     return (
         <div className="tweet-container">
             <section className="profile-pic-top">
-                <ProfilePic/>
+                <ProfilePic pfp={props.author.pfp} />
             </section>
             <section className="user-container">
-                <UserLinkWithPreview id={props.id} username={props.username ? props.username: "Placeholder User"} verified={true} previewPopUp={true}/>
-                <HandleLink handle="MatthewSidaway"/>
+                <UserLinkWithPreview author={props.author} previewPopUp={true}/>
+                <HandleLink handle={props.author.handle}/>
             </section>
             <section className="more-info-button-sect">
                 <MoreInfoButton/>
             </section>
 
             <section className="tweet-content-container">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                <p>{props.tweet.content}</p>
             </section>
             <section className="blank">
 
             </section>
             <section className="interaction-buttons-container">
-                <CommentButton/>
-                <RetweetButton/>
-                <LikeButton/>
+                <CommentButton commentCount={props.tweet.commentCount}/>
+                <RetweetButton retweetCount={props.tweet.retweetCount}/>
+                <LikeButton likeCount={props.tweet.likeCount}/>
                 <ShareButton/>
             </section>
         </div>

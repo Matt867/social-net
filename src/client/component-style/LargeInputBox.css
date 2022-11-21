@@ -1,0 +1,9 @@
+.large-input-box {
+    width: 250px;
+    height: 40px;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: large;
+    border-radius: 5px;
+    border: solid 2px black;
+}

@@ -1,12 +1,12 @@
 import '../component-style/LikeButton.css'
 import { useState } from 'react'
-import UNLIKED from '../unliked-heart.png'
-import LIKED from '../liked-heart.png'
+import UNLIKED from '../images/unliked-heart.png'
+import LIKED from '../images/liked-heart.png'
 
 export default function LikeButton (props) {
 
     const [liked, setLiked] = useState(false)
-    const [likeCount, setLikeCount] = useState(Math.floor(Math.random()*1000))
+    const [likeCount, setLikeCount] = useState(props.likeCount ? props.likeCount : 0)
 
     function handleClick (e) {
         e.preventDefault()

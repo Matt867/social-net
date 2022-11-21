@@ -1,4 +1,4 @@
-import BUTTON from '../three-dots-menu.svg'
+import BUTTON from '../images/three-dots-menu.svg'
 import '../component-style/MoreInfoButton.css'
 
 export default function MoreInfoButton (props) {

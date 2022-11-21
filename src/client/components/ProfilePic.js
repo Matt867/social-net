@@ -1,5 +1,5 @@
-import PERSON from '../person.jpg'
-import DEFAULT_PFP from '../Default_pfp.svg'
+import PERSON from '../images/person.jpg'
+import DEFAULT_PFP from '../images/Default_pfp.svg'
 
 export default function ProfilePic (props) {
     return (

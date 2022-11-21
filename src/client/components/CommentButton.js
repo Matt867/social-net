@@ -1,10 +1,10 @@
 import '../component-style/CommentButton.css'
-import COMMENTBUTTON from '../retweet.png'
+import COMMENTBUTTON from '../images/chat-balloon.png'
 import { useState } from 'react';
 
-export default function CommentButton () {
+export default function CommentButton (props) {
 
-    const [commentCount, setCommentCount] = useState(0)
+    const [commentCount, setCommentCount] = useState(props.commentCount)
 
     function handleClick (e) {
         setCommentCount(commentCount + 1)

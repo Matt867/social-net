@@ -1,10 +1,8 @@
-import SHAREBUTTON from '../retweet.png'
+import SHAREBUTTON from '../images/upload.png'
 import { useState } from 'react'
 import '../component-style/ShareButton.css'
 
 export default function ShareButton (props) {
-
-
 
     function handleClick (e) {
         alert("Share")
