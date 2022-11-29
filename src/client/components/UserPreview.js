@@ -30,7 +30,7 @@ export default function UserPreview (props) {
                 <FollowingCount followingCount={props.author.followingCount}/>
             </section>
             <section className="following-count-container">
-                <FollowerCount followerCount={props.author.followersCount}/>
+                <FollowerCount followerCount={props.author.followerCount}/>
             </section>
         </div>
     );

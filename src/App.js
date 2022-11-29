@@ -5,6 +5,7 @@ import react, { useState, useEffect } from 'react';
 import Home from "./client/pages/Home"
 import SignUp from "./client/pages/SignUp"
 import LogIn from "./client/pages/LogIn"
+import ViewTweet from "./client/pages/ViewTweet"
 import { Routes, Route } from 'react-router-dom';
 
 export default function App() {
@@ -49,6 +50,7 @@ export default function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<LogIn/>}/>
+        <Route path="/tweets/tweet/:id" element={<ViewTweet />}/>
       </Routes>
     </>
   );

@@ -5,24 +5,18 @@ const cors = require('cors')
 const fetch = require('isomorphic-fetch')
 const userRouter = express.Router()
 const { Tweet, User, Impression } = require('../../models')
+const { UniqueConstraintError } = require('sequelize')
 
 userRouter.use(cors())
 
 function validPasswordCheck (req, res, next) {
     let password = req.body.password
 
-    const requirement = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
+    const requirement = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")
     if (requirement.test(password)) {
         next()
     } else {
-        res.status(422).send(`
-        Password does not meet complexity requirement:
-        At least one upper case English letter, (?=.*?[A-Z])
-        At least one lower case English letter, (?=.*?[a-z])
-        At least one digit, (?=.*?[0-9])
-        At least one special character, (?=.*?[#?!@$%^&*-])
-        Minimum eight in length .{8,} (with the anchors)
-        `)
+        res.status(422).send('Password does not meet complexity requirement')
     }
 }
 
@@ -74,6 +68,21 @@ async function getToken(req, res, next) {
     .catch(err => {throw new Error})
 }
 
+async function validateToken (req, res, next) {
+    const token = req.body.token
+
+    const response = await fetch('http://localhost:3001/api/authenticateToken', {
+        method: "GET",
+        headers: {
+            'authorization': `Basic ${token}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+
+    const data = await response.text()
+    req.auth = data
+    next()
+}
 
 userRouter.post('/signup', validPasswordCheck, async (req, res) => {
     try {
@@ -108,7 +117,12 @@ userRouter.post('/signup', validPasswordCheck, async (req, res) => {
 })
 
 userRouter.post('/login', validateCredentials, getToken, (req, res) => {
-    res.send(req.token)
+    res.status(200).send(req.token)
+})
+
+userRouter.post('/validateToken', validateToken, (req, res) => {
+    const authenticated = req.auth
+    res.status(200).send(authenticated)
 })
 
 module.exports = userRouter

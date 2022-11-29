@@ -1,0 +1,7 @@
+.signup-content {
+    display: grid;
+    background-color: grey ;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

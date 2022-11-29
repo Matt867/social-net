@@ -1,0 +1,16 @@
+.new-tweet-button {
+    text-align: center;
+    font-size: large;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    background-color: #1DA1F2;
+    height: 40px;
+    width: 100px;
+    border-radius: 9999px;
+    border: none;
+}
+
+.new-tweet-button > button {
+    border: 0px;
+}
