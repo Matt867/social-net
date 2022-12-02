@@ -42,12 +42,14 @@ export default function App() {
   //   shareLink: "https://www.google.com"
   // }
 
-
+  function handleClickImpression (tweetId) {
+    console.log(tweetId)
+  }
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Home handleClickImpression={handleClickImpression}/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<LogIn/>}/>
         <Route path="/tweets/tweet/:id" element={<ViewTweet />}/>

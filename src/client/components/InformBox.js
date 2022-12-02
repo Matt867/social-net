@@ -9,7 +9,7 @@ export default function InformBox (props) {
     return <>
     <div className="inform" style={{
         backgroundColor: colors[props.level],
-        width: "270px"
+        width: props.width ? props.width : "270px"
     }}>
         <p>
             {props.message}

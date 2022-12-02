@@ -9,6 +9,10 @@
     width: 100px;
     border-radius: 9999px;
     border: none;
+    transition: background-color 0.2s;
+}
+.new-tweet-button:hover {
+    background-color: #1979b4;
 }
 
 .new-tweet-button > button {

@@ -8,6 +8,8 @@ import RetweetButton from './RetweetButton';
 import HandleLink from './HandleLink';
 import CommentButton from './CommentButton';
 import ShareButton from './ShareButton';
+import { useState } from 'react';
+import InformBox from './InformBox';
 
 /**
  *
@@ -18,12 +20,46 @@ import ShareButton from './ShareButton';
 
 export default function Tweet (props) {
 
+    const [errorMessage, setErrorMessage]  = useState("")
 
+
+    async function handleLikeCountChange (change) {
+        try {
+
+            if (Math.abs(change) > 1) {
+                throw new Error("Cannot change like count by more than 1")
+            }
+
+            if (window.localStorage.getItem('jwt')){
+                const response = await fetch("http://localhost:5001/tweets/like", {
+                    method: "POST",
+                    headers: {
+                        'authorization': `Bearer ${window.localStorage.getItem('jwt')}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: props.tweet.id,
+                        change: change
+                    })
+                })
+
+                if (response.status !== 200) {
+                    const message = await response.text()
+                    throw new Error(message)
+                }
+
+                setErrorMessage("")
+            }
+        } catch (error) {
+            setErrorMessage(error.message)
+            console.log(error.message)
+        }
+    }
 
     return (
         <div className="tweet-container">
             <section className="profile-pic-top">
-                <ProfilePic pfp={props.author.pfp} />
+                <ProfilePic pfp={props.author.pfp} width={"80px"} />
             </section>
             <section className="user-container">
                 <UserLinkWithPreview author={props.author} previewPopUp={true}/>
@@ -42,9 +78,10 @@ export default function Tweet (props) {
             <section className="interaction-buttons-container">
                 <CommentButton commentCount={props.tweet.commentCount}/>
                 <RetweetButton retweetCount={props.tweet.retweetCount}/>
-                <LikeButton likeCount={props.tweet.likeCount}/>
+                <LikeButton handleLikeCountChange={handleLikeCountChange} likeCount={props.tweet.likeCount}/>
                 <ShareButton/>
             </section>
+            {errorMessage ? <InformBox level={"error"} message={errorMessage} width={"100%"}/> : <></>}
         </div>
     );
 }

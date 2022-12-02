@@ -12,8 +12,10 @@ export default function LikeButton (props) {
         e.preventDefault()
         if (!liked) {
             setLikeCount(likeCount + 1)
+            props.handleLikeCountChange(1)
         } else {
             setLikeCount(likeCount - 1)
+            props.handleLikeCountChange(-1)
         }
         setLiked(!liked)
     }
