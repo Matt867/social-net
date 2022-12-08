@@ -1,7 +1,7 @@
 const e = require('express')
 const express = require('express')
 const tweetsRouter = express.Router()
-const { Tweet, User, Impression } = require('../../models')
+const { Like, Tweet, User, Impression } = require('../../models')
 
 async function validateToken (req, res, next) {
     const authHeader = req.headers['authorization']
@@ -74,9 +74,58 @@ tweetsRouter.post('/like', validateToken, async (req, res) => {
 
     if (tweet) {
         await tweet.increment('likeCount', { by: change })
-        res.sendStatus(200)
+        const user = await User.findOne({
+            where: {
+                handle: req.auth.handle
+            }
+        })
+        const like = await Like.findOne({
+            where: {
+                UserId: user.id,
+                TweetId: tweet.id
+            }
+        })
+        if (change === 1 && !like) {
+            const newLike = await Like.create()
+            newLike.setUser(user)
+            newLike.setTweet(tweet)
+            res.sendStatus(200)
+        } else if (change === 1 && like) {
+            res.status(400).send("Already liked!")
+        } else {
+            like.destroy()
+            res.sendStatus(200)
+        }
+
     } else {
         res.status(404).send("No such tweet")
+    }
+})
+
+tweetsRouter.get('/tweet/:id/isLiked', validateToken, async (req, res) => {
+    const id = req.params.id
+
+    try {
+        const tweet = await Tweet.findByPk(id)
+        const user = await User.findOne({ where: { handle: req.auth.handle }})
+        if (tweet) {
+            const like = await Like.findOne({
+                where: {
+                    UserId: user.id,
+                    TweetId: tweet.id
+                }
+            })
+            if (like) {
+                res.json(true)
+            } else {
+                res.json(false)
+            }
+        } else {
+            res.status(404).send("Tweet does not exist")
+        }
+    } catch (error) {
+        res.status(400).send(error.message)
+        console.log(error)
     }
 })
 

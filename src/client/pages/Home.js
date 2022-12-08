@@ -30,7 +30,6 @@ export default function Home (props) {
 
             } catch (error) {
                 setError(error)
-                console.log(error.message)
             }
         }
 

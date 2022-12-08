@@ -8,7 +8,7 @@ import RetweetButton from './RetweetButton';
 import HandleLink from './HandleLink';
 import CommentButton from './CommentButton';
 import ShareButton from './ShareButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InformBox from './InformBox';
 
 /**
@@ -21,7 +21,39 @@ import InformBox from './InformBox';
 export default function Tweet (props) {
 
     const [errorMessage, setErrorMessage]  = useState("")
+    const [liked, setLiked] = useState(false)
 
+    useEffect(() => {
+        async function isLiked() {
+            try {
+                if (window.localStorage.getItem('jwt')){
+                    const response = await fetch(`http://localhost:5001/tweets/tweet/${props.tweet.id}/isLiked`, {
+                        method: "GET",
+                        headers: {
+                            'authorization': `Bearer ${window.localStorage.getItem('jwt')}`,
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                    })
+
+                    if (response.status !== 200) {
+                        const message = await response.text()
+                        throw new Error(message)
+                    }
+
+                    const data = await response.json()
+
+                    setLiked(data)
+
+                    setErrorMessage("")
+                }
+            } catch (error) {
+                setErrorMessage(error.message)
+                console.log(error.message)
+            }
+        }
+
+        isLiked()
+    },[])
 
     async function handleLikeCountChange (change) {
         try {
@@ -78,7 +110,7 @@ export default function Tweet (props) {
             <section className="interaction-buttons-container">
                 <CommentButton commentCount={props.tweet.commentCount}/>
                 <RetweetButton retweetCount={props.tweet.retweetCount}/>
-                <LikeButton handleLikeCountChange={handleLikeCountChange} likeCount={props.tweet.likeCount}/>
+                <LikeButton handleLikeCountChange={handleLikeCountChange} likeCount={props.tweet.likeCount} liked={liked}/>
                 <ShareButton/>
             </section>
             {errorMessage ? <InformBox level={"error"} message={errorMessage} width={"100%"}/> : <></>}
